@@ -1,1 +1,1 @@
-A simple personal website.
+A simple app to practice pinyin.
