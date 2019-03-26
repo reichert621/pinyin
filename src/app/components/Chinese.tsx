@@ -151,9 +151,13 @@ class Chinese extends React.Component<ChineseProps, ChineseState> {
   handleRandomChar = () => {
     return this.handleCharTransition(() => {
       const { pinyin = [], current, history = [] } = this.state;
-      const options = range(0, current).concat(
-        range(current + 1, pinyin.length)
-      );
+      const options = pinyin.reduce((acc, chars, index) => {
+        if (index !== current && history.indexOf(index) === -1) {
+          return acc.concat(index);
+        }
+
+        return acc;
+      }, []);
       const next = sample(options) % pinyin.length;
 
       this.setState({
