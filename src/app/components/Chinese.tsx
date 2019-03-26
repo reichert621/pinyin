@@ -158,12 +158,16 @@ class Chinese extends React.Component<ChineseProps, ChineseState> {
 
         return acc;
       }, []);
-      const next = sample(options) % pinyin.length;
+      const next = sample(options) % pinyin.length || 0;
+      console.log('History:', history);
 
       this.setState({
         current: next,
         pose: 'enter',
-        history: history.concat(current)
+        history:
+          history.length === pinyin.length
+            ? [].concat(current)
+            : history.concat(current)
       });
     });
   };
